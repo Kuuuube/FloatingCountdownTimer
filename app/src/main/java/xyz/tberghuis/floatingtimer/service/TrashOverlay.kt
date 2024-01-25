@@ -84,7 +84,7 @@ fun Trash() {
   ) {
     Icon(
       Icons.Filled.Delete, "trash", modifier = Modifier
-        .size(50.dp), tint = iconTint
+        .size((TRASH_SIZE_DP * 0.625).dp), tint = iconTint
     )
   }
 
