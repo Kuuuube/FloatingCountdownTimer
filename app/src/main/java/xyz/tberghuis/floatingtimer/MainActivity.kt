@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
     val preferencesRepository = application.providePreferencesRepository()
     lifecycleScope.launch {
       BillingClientWrapper.run(application) {
-        val purchased = it.checkHaloColourPurchased()
+        val purchased = true
         logd("MainActivity onCreate purchased $purchased")
         preferencesRepository.updateHaloColourPurchased(purchased)
         if (!purchased) {
