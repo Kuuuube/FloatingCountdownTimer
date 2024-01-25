@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-const val TRASH_SIZE_DP = 80
+const val TRASH_SIZE_DP = 40
 
 val TIMER_SIZE_NO_SCALE = 60.dp
 val TIMER_FONT_SIZE_NO_SCALE = 15.5.sp
