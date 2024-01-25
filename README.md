@@ -15,3 +15,15 @@ https://stackoverflow.com/questions/64585547/jetpack-compose-crash-when-adding-v
 
 ## Screenshot
 <img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_home.png' width="350"/> <img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_halo_color.png' width="350"/>
+
+## Building
+
+Built on Android Studio Hedgehog | 2023.1.1 Patch2, installing through ADB is recommended for testing.
+
+To install through ADB:
+
+1. Enable ADB through developer options on your phone
+
+2. Plug your phone into your computer or connect wirelessly
+
+3. Run the app from Android Studio
