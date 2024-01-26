@@ -1,6 +1,6 @@
 # Floating Timer
 
-Features both a countdown timer and stopwatch that will float over other apps.
+A countdown timer and stopwatch that will float over other apps.
 
 ## Usage
 
