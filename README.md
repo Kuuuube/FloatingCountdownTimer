@@ -1,20 +1,22 @@
 # Floating Timer
 
-<a href='https://play.google.com/store/apps/details?id=xyz.tberghuis.floatingtimer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200"/></a>
-
 Features both a countdown timer and stopwatch that will float over other apps.
 
-* Can be dragged / moved around.
-* Tap to start / pause
-* Double tap to reset
-* Drag to trash to exit
+## Usage
 
-SYSTEM_ALERT_WINDOW uses ComposeView that I got working using hacks discussed
-https://gist.github.com/handstandsam/6ecff2f39da72c0b38c07aa80bbb5a2f
-https://stackoverflow.com/questions/64585547/jetpack-compose-crash-when-adding-view-to-window-manager
+1. Set up your timer settings. Optionally, change additional settings from the `...` menu in the top right.
 
-## Screenshot
-<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_home.png' width="350"/> <img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_halo_color.png' width="350"/>
+2. Click `Create` on the timer or stopwatch.
+
+3. Control the timer in the following ways:
+
+    - Dragging or moving it around the screen
+
+    - Tapping on it to start and stop
+
+    - Double tapping on it to reset the time
+
+    - Dragging it to trash to remove it
 
 ## Building
 
