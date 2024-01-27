@@ -39,4 +39,8 @@
     <string name="countdown_timer_color">Countdown Color</string>
     <string name="default_timer_color">Default Timer Color</string>
 
+    <string name="halo">Halo</string>
+    <string name="inner">Inner</string>
+    <string name="outer">Outer</string>
+
 </resources>

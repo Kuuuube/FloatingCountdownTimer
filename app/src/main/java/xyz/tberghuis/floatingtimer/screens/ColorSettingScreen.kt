@@ -96,17 +96,41 @@ fun ColorSettingScreenContent(
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
-      Text("0x" +
-          String.format("%X", (vm.colorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
-          String.format("%X", (vm.colorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
-          String.format("%X", (vm.colorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
-          String.format("%X", (vm.colorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
+      Text(stringResource(R.string.halo) + " 0x" +
+          String.format("%X", (vm.haloColorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.haloColorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.haloColorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.haloColorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
       )
       ClassicColorPicker(
         modifier = Modifier
           .height(300.dp)
           .fillMaxWidth(),
-        colorState = vm.colorPickerColorState
+        colorState = vm.haloColorPickerColorState
+      )
+      Text(stringResource(R.string.inner) + " 0x" +
+          String.format("%X", (vm.innerColorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.innerColorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.innerColorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.innerColorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
+      )
+      ClassicColorPicker(
+        modifier = Modifier
+          .height(300.dp)
+          .fillMaxWidth(),
+        colorState = vm.innerColorPickerColorState
+      )
+      Text(stringResource(R.string.outer) + " 0x" +
+          String.format("%X", (vm.outerColorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.outerColorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.outerColorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.outerColorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
+      )
+      ClassicColorPicker(
+        modifier = Modifier
+          .height(300.dp)
+          .fillMaxWidth(),
+        colorState = vm.outerColorPickerColorState
       )
       ColorSettingScreenActions()
     }
@@ -115,9 +139,23 @@ fun ColorSettingScreenContent(
   // this is wack
   LaunchedEffect(vm) {
     snapshotFlow {
-      vm.colorPickerColorState.value
+      vm.haloColorPickerColorState.value
     }.collect {
       vm.settingsTimerPreviewVmc.haloColor = it.toColor()
+    }
+  }
+  LaunchedEffect(vm) {
+    snapshotFlow {
+      vm.innerColorPickerColorState.value
+    }.collect {
+      vm.settingsTimerPreviewVmc.innerColor = it.toColor()
+    }
+  }
+  LaunchedEffect(vm) {
+    snapshotFlow {
+      vm.outerColorPickerColorState.value
+    }.collect {
+      vm.settingsTimerPreviewVmc.outerColor = it.toColor()
     }
   }
 }
@@ -135,6 +173,8 @@ fun ColorSettingScreenActions(
     "stopwatch" -> {
       {
         homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
+        homeVm.stopwatchInnerColor = vm.settingsTimerPreviewVmc.innerColor
+        homeVm.stopwatchOuterColor = vm.settingsTimerPreviewVmc.outerColor
         nav.popBackStack()
       }
     }
@@ -142,6 +182,8 @@ fun ColorSettingScreenActions(
     "countdown" -> {
       {
         homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
+        homeVm.countdownInnerColor = vm.settingsTimerPreviewVmc.innerColor
+        homeVm.countdownOuterColor = vm.settingsTimerPreviewVmc.outerColor
         nav.popBackStack()
       }
     }
@@ -152,6 +194,10 @@ fun ColorSettingScreenActions(
         // doitwrong
         homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
         homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
+        homeVm.countdownInnerColor = vm.settingsTimerPreviewVmc.innerColor
+        homeVm.stopwatchInnerColor = vm.settingsTimerPreviewVmc.innerColor
+        homeVm.countdownOuterColor = vm.settingsTimerPreviewVmc.outerColor
+        homeVm.stopwatchOuterColor = vm.settingsTimerPreviewVmc.outerColor
         nav.popBackStack()
       }
     }

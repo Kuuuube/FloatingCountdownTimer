@@ -26,8 +26,10 @@ class Countdown(
   private val service: FloatingService,
   val durationSeconds: Int,
   bubbleSizeScaleFactor: Float,
-  haloColor: Color
-) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
+  haloColor: Color,
+  innerColor: Color,
+  outerColor: Color
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, innerColor, outerColor) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
   val fontColor = MutableStateFlow(Color(0xFF888888))

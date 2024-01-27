@@ -33,4 +33,8 @@
     <string name="countdown_timer_color">倒计时颜色</string>
     <string name="default_timer_color">默认计时器颜色</string>
 
+    <string name="halo">Halo</string>
+    <string name="inner">Inner</string>
+    <string name="outer">Outer</string>
+
 </resources>

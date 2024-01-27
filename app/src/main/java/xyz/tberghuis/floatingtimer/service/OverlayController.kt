@@ -35,12 +35,12 @@ class OverlayController(val service: FloatingService) {
     return bubbleSet.size
   }
 
-  fun addStopwatch(haloColor: Color) {
+  fun addStopwatch(haloColor: Color, innerColor: Color, outerColor: Color) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val stopwatch = Stopwatch(service, bubbleScale, haloColor)
+      val stopwatch = Stopwatch(service, bubbleScale, haloColor, innerColor, outerColor)
       val stopwatchView = @Composable { StopwatchView(stopwatch) }
       // does coroutine dispatcher matter here???
       withContext(Main) {
@@ -49,12 +49,12 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-  fun addCountdown(durationSeconds: Int, haloColor: Color) {
+  fun addCountdown(durationSeconds: Int, haloColor: Color, innerColor: Color, outerColor: Color) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor)
+      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, innerColor, outerColor)
       val countdownView = @Composable { CountdownView(countdown) }
       withContext(Main) {
         addBubble(countdown, countdownView)

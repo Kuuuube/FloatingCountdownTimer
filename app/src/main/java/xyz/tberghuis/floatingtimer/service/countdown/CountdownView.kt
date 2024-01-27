@@ -38,13 +38,13 @@ fun CountdownViewDisplay(
       .zIndex(1f),
     contentAlignment = Alignment.Center
   ) {
-    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
+    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor, bubbleProperties.innerColor, bubbleProperties.outerColor)
     TimeDisplay(countdownSeconds, bubbleProperties.fontSize, fontColor)
   }
 }
 
 @Composable
-fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color) {
+fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color, innerColor: Color, outerColor: Color) {
   val sweepAngle = 360 * timeLeftFraction
 
   Canvas(
@@ -53,10 +53,10 @@ fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color
     // background
     // todo make partial transparent
     drawCircle(
-      color = Color.White,
+      color = innerColor,
     )
     drawArc(
-      color = Color.White,
+      color = outerColor,
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -65,7 +65,7 @@ fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color
     )
 
     drawArc(
-      color = haloColor.copy(alpha = .1f),
+      color = outerColor,
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,

@@ -24,7 +24,9 @@ class SizeSettingViewModel(application: Application) : AndroidViewModel(applicat
     viewModelScope.launch {
       val haloColor = preferences.haloColourFlow.first()
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
+      val innerColor = preferences.innerColourFlow.first()
+      val outerColor = preferences.outerColourFlow.first()
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, innerColor, outerColor)
       initialised = true
     }
   }

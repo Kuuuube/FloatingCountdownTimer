@@ -11,6 +11,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
+import xyz.tberghuis.floatingtimer.DEFAULT_INNER_COLOR
+import xyz.tberghuis.floatingtimer.DEFAULT_OUTER_COLOR
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -30,11 +32,19 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
 
   var countdownHaloColor by mutableStateOf(DEFAULT_HALO_COLOR)
   var stopwatchHaloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+  var countdownInnerColor by mutableStateOf(DEFAULT_INNER_COLOR)
+  var stopwatchInnerColor by mutableStateOf(DEFAULT_INNER_COLOR)
+  var countdownOuterColor by mutableStateOf(DEFAULT_OUTER_COLOR)
+  var stopwatchOuterColor by mutableStateOf(DEFAULT_OUTER_COLOR)
 
   init {
     viewModelScope.launch {
       countdownHaloColor = preferencesRepository.haloColourFlow.first()
       stopwatchHaloColor = countdownHaloColor
+      countdownInnerColor = preferencesRepository.innerColourFlow.first()
+      stopwatchInnerColor = countdownInnerColor
+      countdownOuterColor = preferencesRepository.outerColourFlow.first()
+      stopwatchOuterColor = countdownOuterColor
     }
   }
 
@@ -87,7 +97,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       }
       boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(
         totalSecs,
-        countdownHaloColor
+        countdownHaloColor,
+        countdownInnerColor,
+        countdownOuterColor
       )
     }
   }
@@ -99,7 +111,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         return@launch
       }
       boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch(
-        stopwatchHaloColor
+        stopwatchHaloColor,
+        stopwatchInnerColor,
+        stopwatchOuterColor
       )
     }
   }

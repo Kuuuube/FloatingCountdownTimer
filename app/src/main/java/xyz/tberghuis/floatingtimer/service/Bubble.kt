@@ -13,6 +13,8 @@ interface BubbleProperties {
   val arcWidth: Dp
   val fontSize: TextUnit
   val haloColor: Color
+  val innerColor: Color
+  val outerColor: Color
 
   companion object {
     fun calcBubbleSizeDp(scaleFactor: Float) = TIMER_SIZE_NO_SCALE * (scaleFactor)
@@ -24,7 +26,9 @@ interface BubbleProperties {
 abstract class Bubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float,
-  override val haloColor: Color
+  override val haloColor: Color,
+  override val innerColor: Color,
+  override val outerColor: Color
 ) : BubbleProperties {
   final override val bubbleSizeDp = BubbleProperties.calcBubbleSizeDp(bubbleSizeScaleFactor)
   val bubbleSizePx: Int = (bubbleSizeDp.value * service.resources.displayMetrics.density).toInt()

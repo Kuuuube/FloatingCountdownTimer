@@ -11,13 +11,18 @@ import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
+import xyz.tberghuis.floatingtimer.DEFAULT_INNER_COLOR
+import xyz.tberghuis.floatingtimer.DEFAULT_OUTER_COLOR
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class ColorSettingViewModel(application: Application, savedStateHandle: SavedStateHandle) :
   AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
-  var colorPickerColorState = mutableStateOf(HsvColor.from(DEFAULT_HALO_COLOR))
+  var haloColorPickerColorState = mutableStateOf(HsvColor.from(DEFAULT_HALO_COLOR))
+  var innerColorPickerColorState = mutableStateOf(HsvColor.from(DEFAULT_INNER_COLOR))
+  var outerColorPickerColorState = mutableStateOf(HsvColor.from(DEFAULT_OUTER_COLOR))
+
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
 
@@ -34,16 +39,22 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
 
     viewModelScope.launch {
       val haloColor = preferences.haloColourFlow.first()
-      colorPickerColorState.value = HsvColor.from(haloColor)
+      haloColorPickerColorState.value = HsvColor.from(haloColor)
+      val innerColor = preferences.innerColourFlow.first()
+      innerColorPickerColorState.value = HsvColor.from(innerColor)
+      val outerColor = preferences.outerColourFlow.first()
+      outerColorPickerColorState.value = HsvColor.from(outerColor)
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, innerColor, outerColor)
       initialised = true
     }
   }
 
   fun saveDefaultHaloColor() {
     viewModelScope.launch {
-      preferences.updateHaloColour(colorPickerColorState.value.toColor())
+      preferences.updateHaloColour(haloColorPickerColorState.value.toColor())
+      preferences.updateInnerColour(innerColorPickerColorState.value.toColor())
+      preferences.updateOuterColour(outerColorPickerColorState.value.toColor())
     }
   }
 

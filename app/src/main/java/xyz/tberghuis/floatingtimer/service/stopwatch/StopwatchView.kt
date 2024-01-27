@@ -61,10 +61,10 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwa
     Modifier.fillMaxSize()
   ) {
     drawCircle(
-      color = Color.White,
+      color = stopwatch.innerColor,
     )
     drawArc(
-      color = Color.White,
+      color = stopwatch.outerColor,
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -73,7 +73,7 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwa
     )
 
     drawArc(
-      color = stopwatch.haloColor.copy(alpha = .1f),
+      color = stopwatch.outerColor,
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
