@@ -19,7 +19,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
   private val preferencesRepository = application.providePreferencesRepository()
   val vibrationFlow = preferencesRepository.vibrationFlow
 
-  var minutes = mutableStateOf(TextFieldValue("0"))
+  var minutes = mutableStateOf(TextFieldValue("5"))
   var seconds = mutableStateOf(TextFieldValue("0"))
   var showGrantOverlayDialog by mutableStateOf(false)
 
