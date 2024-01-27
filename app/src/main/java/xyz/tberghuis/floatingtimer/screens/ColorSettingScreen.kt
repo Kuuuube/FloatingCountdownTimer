@@ -96,6 +96,12 @@ fun ColorSettingScreenContent(
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
+      Text("0x" +
+          String.format("%X", (vm.colorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.colorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.colorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.colorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
+      )
       ClassicColorPicker(
         modifier = Modifier
           .height(300.dp)

@@ -103,6 +103,7 @@ fun SizeSettingScreenContent(
 fun SliderScale(
   vmc: SettingsTimerPreviewVmc
 ) {
+  Text(String.format("%.2f", vmc.bubbleSizeScaleFactor))
   Slider(
     value = vmc.bubbleSizeScaleFactor,
     onValueChange = {
