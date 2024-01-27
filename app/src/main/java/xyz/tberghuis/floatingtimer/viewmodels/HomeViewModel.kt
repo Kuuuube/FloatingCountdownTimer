@@ -10,7 +10,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.DEFAULT_ACTIVE_FONT_COLOR
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
+import xyz.tberghuis.floatingtimer.DEFAULT_INACTIVE_FONT_COLOR
 import xyz.tberghuis.floatingtimer.DEFAULT_INNER_COLOR
 import xyz.tberghuis.floatingtimer.DEFAULT_OUTER_COLOR
 import xyz.tberghuis.floatingtimer.R
@@ -36,6 +38,10 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
   var stopwatchInnerColor by mutableStateOf(DEFAULT_INNER_COLOR)
   var countdownOuterColor by mutableStateOf(DEFAULT_OUTER_COLOR)
   var stopwatchOuterColor by mutableStateOf(DEFAULT_OUTER_COLOR)
+  var countdownActiveFontColor by mutableStateOf(DEFAULT_ACTIVE_FONT_COLOR)
+  var stopwatchActiveFontColor by mutableStateOf(DEFAULT_ACTIVE_FONT_COLOR)
+  var countdownInactiveFontColor by mutableStateOf(DEFAULT_INACTIVE_FONT_COLOR)
+  var stopwatchInactiveFontColor by mutableStateOf(DEFAULT_INACTIVE_FONT_COLOR)
 
   init {
     viewModelScope.launch {
@@ -45,6 +51,10 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       stopwatchInnerColor = countdownInnerColor
       countdownOuterColor = preferencesRepository.outerColourFlow.first()
       stopwatchOuterColor = countdownOuterColor
+      countdownActiveFontColor = preferencesRepository.activeFontColourFlow.first()
+      stopwatchActiveFontColor = countdownActiveFontColor
+      countdownInactiveFontColor = preferencesRepository.inactiveFontColourFlow.first()
+      stopwatchInactiveFontColor = countdownInactiveFontColor
     }
   }
 
@@ -99,7 +109,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         totalSecs,
         countdownHaloColor,
         countdownInnerColor,
-        countdownOuterColor
+        countdownOuterColor,
+        countdownActiveFontColor,
+        countdownInactiveFontColor
       )
     }
   }
@@ -113,7 +125,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch(
         stopwatchHaloColor,
         stopwatchInnerColor,
-        stopwatchOuterColor
+        stopwatchOuterColor,
+        stopwatchActiveFontColor,
+        stopwatchInactiveFontColor
       )
     }
   }

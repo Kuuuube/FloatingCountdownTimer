@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 
 // Vmc = View Model Component
-class SettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color, initialInnerColor: Color, initialOuterColor: Color) : BubbleProperties {
+class SettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color, initialInnerColor: Color, initialOuterColor: Color, initialActiveFontColor: Color, initialInactiveFontColor: Color) : BubbleProperties {
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override val bubbleSizeDp by derivedStateOf {
     BubbleProperties.calcBubbleSizeDp(bubbleSizeScaleFactor)
@@ -23,4 +23,6 @@ class SettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color, init
   override var haloColor by mutableStateOf(initialHaloColor)
   override var innerColor by mutableStateOf(initialInnerColor)
   override var outerColor by mutableStateOf(initialOuterColor)
+  override var activeFontColor by mutableStateOf(initialActiveFontColor)
+  override var inactiveFontColor by mutableStateOf(initialInactiveFontColor)
 }

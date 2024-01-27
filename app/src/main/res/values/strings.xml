@@ -42,5 +42,7 @@
     <string name="halo">Halo</string>
     <string name="inner">Inner</string>
     <string name="outer">Outer</string>
+    <string name="active_font">Active Font</string>
+    <string name="inactive_font">Inactive Font</string>
 
 </resources>

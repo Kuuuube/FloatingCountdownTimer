@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.DEFAULT_INACTIVE_FONT_COLOR
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
@@ -28,11 +29,14 @@ class Countdown(
   bubbleSizeScaleFactor: Float,
   haloColor: Color,
   innerColor: Color,
-  outerColor: Color
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, innerColor, outerColor) {
+  outerColor: Color,
+  activeFontColor: Color,
+  inactiveFontColor: Color
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, innerColor, outerColor, activeFontColor, inactiveFontColor) {
+  private val preferences = service.application.providePreferencesRepository()
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
-  val fontColor = MutableStateFlow(Color(0xFF888888))
+  val fontColor = MutableStateFlow(inactiveFontColor)
   private var countDownTimer: CountDownTimer? = null
   private val vibrator = initVibrator()
 
@@ -52,12 +56,12 @@ class Countdown(
     logd("click target onclick")
     when (timerState.value) {
       is TimerStatePaused -> {
-        fontColor.value = Color(0xFF000000)
+        fontColor.value = activeFontColor
         timerState.value = TimerStateRunning
       }
 
       is TimerStateRunning -> {
-        fontColor.value = Color(0xFF888888)
+        fontColor.value = inactiveFontColor
         timerState.value = TimerStatePaused
       }
 

@@ -29,3 +29,5 @@ const val INTENT_COMMAND_RESET = "command_reset"
 val DEFAULT_HALO_COLOR = Color(red = 103, green = 80, blue = 164)
 val DEFAULT_INNER_COLOR = Color.White
 val DEFAULT_OUTER_COLOR = Color(red = 103, green = 80, blue = 164, alpha = 25)
+val DEFAULT_ACTIVE_FONT_COLOR = Color(red = 0, green = 0, blue = 0)
+val DEFAULT_INACTIVE_FONT_COLOR = Color(red = 127, green = 127, blue = 127)

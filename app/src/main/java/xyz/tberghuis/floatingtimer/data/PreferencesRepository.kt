@@ -12,7 +12,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import xyz.tberghuis.floatingtimer.BuildConfig
+import xyz.tberghuis.floatingtimer.DEFAULT_ACTIVE_FONT_COLOR
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
+import xyz.tberghuis.floatingtimer.DEFAULT_INACTIVE_FONT_COLOR
 import xyz.tberghuis.floatingtimer.DEFAULT_INNER_COLOR
 import xyz.tberghuis.floatingtimer.DEFAULT_OUTER_COLOR
 import xyz.tberghuis.floatingtimer.logd
@@ -83,7 +85,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       DEFAULT_INNER_COLOR
     else
       Color(innerColourString.toULong())
-    logd("outerColourFlow outercolor $innerColor")
+    logd("innerColourFlow innercolor $innerColor")
     innerColor
   }
 
@@ -92,6 +94,42 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     val innerColourString = color.value.toString()
     dataStore.edit { preferences ->
       preferences[stringPreferencesKey("inner_colour")] = innerColourString
+    }
+  }
+
+  val activeFontColourFlow: Flow<Color> = dataStore.data.map { preferences ->
+    val activeFontColourString = preferences[stringPreferencesKey("active_font_colour")]
+    val activeFontColor = if (activeFontColourString == null)
+      DEFAULT_ACTIVE_FONT_COLOR
+    else
+      Color(activeFontColourString.toULong())
+    logd("activeFontColourFlow activefontcolor $activeFontColor")
+    activeFontColor
+  }
+
+  suspend fun updateActiveFontColour(color: Color) {
+    logd("updateActiveFontColour")
+    val activeFontColourString = color.value.toString()
+    dataStore.edit { preferences ->
+      preferences[stringPreferencesKey("active_font_colour")] = activeFontColourString
+    }
+  }
+
+  val inactiveFontColourFlow: Flow<Color> = dataStore.data.map { preferences ->
+    val inactiveFontColourString = preferences[stringPreferencesKey("inactive_font_colour")]
+    val inactiveFontColor = if (inactiveFontColourString == null)
+      DEFAULT_INACTIVE_FONT_COLOR
+    else
+      Color(inactiveFontColourString.toULong())
+    logd("inactiveFontColourFlow inactivefontcolor $inactiveFontColor")
+    inactiveFontColor
+  }
+
+  suspend fun updateInactiveFontColour(color: Color) {
+    logd("updateInactiveFontColour")
+    val inactiveFontColourString = color.value.toString()
+    dataStore.edit { preferences ->
+      preferences[stringPreferencesKey("inactive_font_colour")] = inactiveFontColourString
     }
   }
 

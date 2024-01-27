@@ -45,7 +45,7 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
         Box(
           contentAlignment = Alignment.Center,
         ) {
-          CountdownViewDisplay(vmc, 0.6f, 59, Color(0xFF888888))
+          CountdownViewDisplay(vmc, 0.6f, 59)
         }
       }
     }

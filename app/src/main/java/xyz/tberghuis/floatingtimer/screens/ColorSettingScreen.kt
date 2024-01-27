@@ -132,6 +132,30 @@ fun ColorSettingScreenContent(
           .fillMaxWidth(),
         colorState = vm.outerColorPickerColorState
       )
+      Text(stringResource(R.string.active_font) + " 0x" +
+          String.format("%X", (vm.activeFontColorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.activeFontColorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.activeFontColorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.activeFontColorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
+      )
+      ClassicColorPicker(
+        modifier = Modifier
+          .height(300.dp)
+          .fillMaxWidth(),
+        colorState = vm.activeFontColorPickerColorState
+      )
+      Text(stringResource(R.string.inactive_font) + " 0x" +
+          String.format("%X", (vm.inactiveFontColorPickerColorState.value.toColor().alpha * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.inactiveFontColorPickerColorState.value.toColor().red * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.inactiveFontColorPickerColorState.value.toColor().green * 255).toInt()).padStart(2, '0') +
+          String.format("%X", (vm.inactiveFontColorPickerColorState.value.toColor().blue * 255).toInt()).padStart(2, '0')
+      )
+      ClassicColorPicker(
+        modifier = Modifier
+          .height(300.dp)
+          .fillMaxWidth(),
+        colorState = vm.inactiveFontColorPickerColorState
+      )
       ColorSettingScreenActions()
     }
   }
@@ -158,6 +182,20 @@ fun ColorSettingScreenContent(
       vm.settingsTimerPreviewVmc.outerColor = it.toColor()
     }
   }
+  LaunchedEffect(vm) {
+    snapshotFlow {
+      vm.activeFontColorPickerColorState.value
+    }.collect {
+      vm.settingsTimerPreviewVmc.activeFontColor = it.toColor()
+    }
+  }
+  LaunchedEffect(vm) {
+    snapshotFlow {
+      vm.inactiveFontColorPickerColorState.value
+    }.collect {
+      vm.settingsTimerPreviewVmc.inactiveFontColor = it.toColor()
+    }
+  }
 }
 
 @Composable
@@ -175,6 +213,8 @@ fun ColorSettingScreenActions(
         homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
         homeVm.stopwatchInnerColor = vm.settingsTimerPreviewVmc.innerColor
         homeVm.stopwatchOuterColor = vm.settingsTimerPreviewVmc.outerColor
+        homeVm.stopwatchActiveFontColor = vm.settingsTimerPreviewVmc.activeFontColor
+        homeVm.stopwatchInactiveFontColor = vm.settingsTimerPreviewVmc.inactiveFontColor
         nav.popBackStack()
       }
     }
@@ -184,6 +224,8 @@ fun ColorSettingScreenActions(
         homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
         homeVm.countdownInnerColor = vm.settingsTimerPreviewVmc.innerColor
         homeVm.countdownOuterColor = vm.settingsTimerPreviewVmc.outerColor
+        homeVm.countdownActiveFontColor = vm.settingsTimerPreviewVmc.activeFontColor
+        homeVm.countdownInactiveFontColor = vm.settingsTimerPreviewVmc.inactiveFontColor
         nav.popBackStack()
       }
     }
@@ -198,6 +240,10 @@ fun ColorSettingScreenActions(
         homeVm.stopwatchInnerColor = vm.settingsTimerPreviewVmc.innerColor
         homeVm.countdownOuterColor = vm.settingsTimerPreviewVmc.outerColor
         homeVm.stopwatchOuterColor = vm.settingsTimerPreviewVmc.outerColor
+        homeVm.countdownActiveFontColor = vm.settingsTimerPreviewVmc.activeFontColor
+        homeVm.stopwatchActiveFontColor = vm.settingsTimerPreviewVmc.activeFontColor
+        homeVm.countdownInactiveFontColor = vm.settingsTimerPreviewVmc.inactiveFontColor
+        homeVm.stopwatchInactiveFontColor = vm.settingsTimerPreviewVmc.inactiveFontColor
         nav.popBackStack()
       }
     }

@@ -15,8 +15,10 @@ class Stopwatch(
   bubbleSizeScaleFactor: Float,
   haloColor: Color,
   innerColor: Color,
-  outerColor: Color
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, innerColor, outerColor) {
+  outerColor: Color,
+  activeFontColor: Color,
+  inactiveFontColor: Color
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, innerColor, outerColor, activeFontColor, inactiveFontColor) {
   val timeElapsed = mutableIntStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   val fontColor = MutableStateFlow(Color(0xFF888888))
@@ -28,7 +30,7 @@ class Stopwatch(
       isRunningStateFlow.collect { running ->
         when (running) {
           true -> {
-            fontColor.value = Color(0xFF000000)
+            fontColor.value = activeFontColor
             stopwatchIncrementTask = timerTask {
               timeElapsed.intValue++
             }
@@ -36,7 +38,7 @@ class Stopwatch(
           }
 
           false -> {
-            fontColor.value = Color(0xFF888888)
+            fontColor.value = inactiveFontColor
             stopwatchIncrementTask?.cancel()
             stopwatchIncrementTask = null
           }
