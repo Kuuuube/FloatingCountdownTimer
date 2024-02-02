@@ -28,7 +28,7 @@ class SizeSettingViewModel(application: Application) : AndroidViewModel(applicat
       val outerColor = preferences.outerColourFlow.first()
       val activeFont = preferences.activeFontColourFlow.first()
       val inactiveFont = preferences.inactiveFontColourFlow.first()
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, innerColor, outerColor, activeFont, inactiveFont)
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, innerColor, outerColor, activeFont, inactiveFont, inactiveFont)
       initialised = true
     }
   }

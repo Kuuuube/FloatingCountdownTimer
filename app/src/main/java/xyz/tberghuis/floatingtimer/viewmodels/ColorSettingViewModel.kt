@@ -53,7 +53,7 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
       val inactiveFontColor = preferences.inactiveFontColourFlow.first()
       inactiveFontColorPickerColorState.value = HsvColor.from(inactiveFontColor)
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, innerColor, outerColor, activeFontColor, inactiveFontColor)
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, innerColor, outerColor, activeFontColor, inactiveFontColor, inactiveFontColor)
       initialised = true
     }
   }

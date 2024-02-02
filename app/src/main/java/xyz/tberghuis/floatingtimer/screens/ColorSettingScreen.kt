@@ -187,6 +187,7 @@ fun ColorSettingScreenContent(
       vm.activeFontColorPickerColorState.value
     }.collect {
       vm.settingsTimerPreviewVmc.activeFontColor = it.toColor()
+      vm.settingsTimerPreviewVmc.visibleFontColor = it.toColor()
     }
   }
   LaunchedEffect(vm) {
@@ -194,6 +195,7 @@ fun ColorSettingScreenContent(
       vm.inactiveFontColorPickerColorState.value
     }.collect {
       vm.settingsTimerPreviewVmc.inactiveFontColor = it.toColor()
+      vm.settingsTimerPreviewVmc.visibleFontColor = it.toColor()
     }
   }
 }
