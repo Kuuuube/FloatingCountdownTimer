@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.Dp
 @Composable
 fun CountdownView(countdown: Countdown) {
   val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
-  CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds)
+  CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds, countdown.fontColor.collectAsState().value)
 }
 
 // need better naming conventions
@@ -28,7 +28,8 @@ fun CountdownView(countdown: Countdown) {
 fun CountdownViewDisplay(
   bubbleProperties: BubbleProperties,
   timeLeftFraction: Float,
-  countdownSeconds: Int
+  countdownSeconds: Int,
+  fontColor: Color
 ) {
   Box(
     modifier = Modifier
@@ -38,7 +39,7 @@ fun CountdownViewDisplay(
     contentAlignment = Alignment.Center
   ) {
     CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor, bubbleProperties.innerColor, bubbleProperties.outerColor)
-    TimeDisplay(countdownSeconds, bubbleProperties.fontSize, bubbleProperties.inactiveFontColor)
+    TimeDisplay(countdownSeconds, bubbleProperties.fontSize, fontColor)
   }
 }
 
